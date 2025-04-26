@@ -1,42 +1,159 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  animation: backgroundAnimation 5s infinite alternate;
+}
+
+.game-container {
   text-align: center;
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #222; /* Dark color for better visibility */
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: titleAnimation 3s ease-in-out infinite;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  background-color: #f5a623;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cell filled animation */
+.cell.filled {
+  background-color: #f9c74f;
+  pointer-events: none;
+  transform: scale(1.1);
+}
+
+/* Hover effect */
+.cell:hover {
+  transform: scale(1.1);
+}
+
+/* Winning cell animation and styling */
+.cell.winning {
+  background-color: #28a745 !important;
+  color: white;
+  animation: pulseWin 1s ease-out forwards;
+  box-shadow: 0 0 20px 5px rgba(40, 167, 69, 0.8);
+}
+
+/* Winning pulse effect */
+@keyframes pulseWin {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px 2px rgba(40, 167, 69, 0.8);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px 5px rgba(40, 167, 69, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px 2px rgba(40, 167, 69, 0.8);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Game over message styling */
+.game-over-message {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #222; /* Dark color for better visibility */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Restart button styling */
+.restart-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  background-color: #36b3c6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.restart-button:hover {
+  background-color: #2a8b94;
+}
+
+.restart-button:active {
+  transform: scale(0.98);
+}
+
+/* Background animation for shine effect */
+@keyframes backgroundAnimation {
+  0% {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+  }
+  50% {
+    background: linear-gradient(45deg, #8e2de2, #4a00e0);
+  }
+  100% {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
   }
 }
 
-.card {
-  padding: 2em;
+/* Title animation for glowing effect */
+@keyframes titleAnimation {
+  0% {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.3);
+  }
 }
 
-.read-the-docs {
-  color: #888;
+/* Fade-in animation for game-over message */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
